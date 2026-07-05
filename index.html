@@ -254,7 +254,7 @@
         .selected-content p { font-weight: 300; line-height: 1.7; color: #55635a; font-size: 14px; white-space: pre-wrap; }
         
         .img-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; width: 100%; }
-        .img-group img { max-width: 100%; max-height: 110px; border-radius: 12px; cursor: pointer; object-fit: contain; flex: 1 1 auto; background: #fff; border: 1px solid #eaefec; padding: 2px; }
+        .img-group img { width: 45%; max-height: 110px; border-radius: 12px; cursor: pointer; object-fit: contain; background: #fff; border: 1px solid #eaefec; padding: 2px; }
         
         /* 进度页样式 */
         .progress-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
@@ -456,7 +456,7 @@ function compileImageGroupHelper(d) {
     let html = '<div class="img-group" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; width:100%;">';
     rawImages.forEach(img => {
         let fullPath = img.startsWith('images/') ? img : `images/${img}`;
-        html += `<img src="${fullPath}" alt="${d.id}" onclick="event.stopPropagation();window.openLightbox('${fullPath}')" style="max-width:100%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; flex:1 1 auto; background:#fff; border:1px solid #eaefec; padding:2px;">`;
+        html += `<img src="${fullPath}" alt="${d.id}" onclick="event.stopPropagation();window.openLightbox('${fullPath}')" style="width:45%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; background:#fff; border:1px solid #eaefec; padding:2px;">`;
     });
     return html + '</div>';
 }
