@@ -348,7 +348,7 @@
     </div>
 
     <div id="sheet1" class="sheet active">
-        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">📖 点击三十七道品名称图标,可尽览老师提供的文字讲解🍵</div>
+        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">📖 点击图标,查阅详情</div>
         <div class="card scroll-area" id="browseContainer"></div>
     </div>
 
@@ -370,14 +370,13 @@
             <div class="structure-list" id="structureList" style="max-height: 240px; margin-bottom: 16px;"></div>
             <!-- 展示区在下方 -->
             <div class="selected-content" id="selectedContent" style="margin-top: 0;">
-                <h4><i style="font-style: normal;">🧘</i> 结合需要,自行选择主题</h4>
+                <h4><i style="font-style: normal;">🎐</i> 自取所需</h4>
                 <p style="color:#94a39a;">点击上方细分标题，可查看对应实修功课卡，下翻可浏览全部</p>
             </div>
         </div>
     </div>
 
     <div id="sheet4" class="sheet">
-        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">🌱 每一次练习都算数</div>
         <div class="card">
             <div class="progress-stats">
                 <div class="stat-box"><i style="font-style: normal;">☀️</i> 已练习 <span id="practicedCount">0</span></div>
@@ -388,7 +387,6 @@
     </div>
 
     <div id="sheet5" class="sheet">
-        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">✨ 微小改变，终成光明</div>
         <div class="card">
             <div id="habitList"></div>
             <div class="habit-add">
@@ -478,7 +476,7 @@ function compileImageGroupHelper(d) {
     // ========================================== 二、底层细分类数据集 (全 Emoji 版) ==========================================
     const dharmaData = [
         // ----------- 四念处 -----------
-        { id: '身念住', category: '四念处', icon: '🧘', tag: '四念处',
+        { id: '身念住', category: '四念处', icon: '🧸', tag: '四念处',
           sanskrit: 'Kāyasmṛtyupasthāna',
           etymology: 'Kāya：源自字根 ci（堆积、积聚），指由骨肉、呼吸等诸多元素堆积而成的聚合体（身体）。\nAnupassanā：由前綴 anu-（随顺、连续、深入）+ 字根paś（看、观察、照见）组成，意为连续不断地深入观照。\nSmṛti-upasthāna：Smṛti（记忆、明记不忘、不失神）；\nupasthāna（置于近前、建立、安住）。\n合起来意为：「將注意力精確地安置於身體聚合體上，進行連續不失神的微觀照見」。',
           classical: '----《俱舍論》：《俱舍论》卷二十五：「以自相共相，观身受心法，是名晨朝修念住。」身念住即是「观身不净」，非指厌恶肉体，而是如实观察身体由三十六物不净和合，无有固定实体。（古代用这个方法，观察身体是一堆流动的细胞）',
@@ -489,7 +487,7 @@ function compileImageGroupHelper(d) {
           cardContent: '今日实修主题是：「身念住」\n随处练习：不限于座上，请大家在日常生活中，随时随地把觉察带回身体',
           img1: 'guanshenbujing.jpeg', img2: 'guanshenwuwo.png', img3:'guanshen_jingwen.png' },
           
-        { id: '受念住', category: '四念处', icon: '💧', tag: '四念处',
+        { id: '受念住', category: '四念处', icon: '🌈', tag: '四念处',
           sanskrit: '梵：Vedanāsmṛtyupasthāna \n巴：Vedanānupassanā',
           etymology: 'Vedanā：源自字根vid（感知、体验、知晓），指主体对客体环境产生的情绪、感受反馈（苦、乐、不苦不乐;\n合起來意為：「將注意力精確安置於情緒与感受的生滅上，進行不失神的隨順觀照」。',
           classical: '----《大毗婆沙论》卷一八七：「受念住，谓如实知苦受、乐受、不苦不乐受自相及共相。」观「受是苦」，洞察一切世俗享受本质皆是变异之苦，无有真正恒常的乐受。',
@@ -500,7 +498,7 @@ function compileImageGroupHelper(d) {
           cardContent: '今日实修主题是：「受念住」，\n当痛苦或快乐升起时，不要立刻掉进“我很痛苦”或“我很快乐”的叙事里\n今天，让我们试着跳出原来的惯性，更清醒的去觉察每一份感受',
           img1: 'guanshoushiku.png', img2: 'guanshoushiku2.png', img3: 'guanshou_jingwen.png' },
           
-        { id: '心念住', category: '四念处', icon: '☁️', tag: '四念处',
+        { id: '心念住', category: '四念处', icon: '🌊', tag: '四念处',
           sanskrit: '梵：Cittasmṛtyupasthāna / \n巴：Cittānupassanā',
           etymology: '----Citta：源自字根 cit（感知、思考、意识、积聚），指心识、念头、起心动念的主体。\n---（我们能思考的那个东西）',
           classical: '----《瑜伽师地论》卷三十六：「心念住，谓如实观心无常相。」观「心无常」，了知心识念念生灭，刹那不住，如猿猴探枝，无有一不变的主宰者。',
@@ -717,10 +715,10 @@ function compileImageGroupHelper(d) {
                 <div id="cat-child-${cat}" class="cat-inner-content">`;
             
             if (ov && ((ov.concept && ov.concept.trim()!=='') || (ov.sanskrit && ov.sanskrit.trim()!==''))) {
-                html += `<div class="cat-overview-box">`;
-                if(ov.concept) html += `${renderTextHelper(ov.concept)}`;
-                if(ov.sanskrit) html += `\n\n${renderTextHelper(ov.sanskrit)}`;
-                html += `</div>`;
+                let combinedText = '';
+                if(ov.concept) combinedText += ov.concept;
+                if(ov.sanskrit) combinedText += (ov.concept && !ov.concept.endsWith('----') ? '----' : '') + ov.sanskrit;
+                html += `<div class="cat-overview-box">${renderTextHelper(combinedText)}</div>`;
             }
 
             items.forEach(d => {
