@@ -11,7 +11,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Quicksand', sans-serif;
-            background: #f4f7f6; /* 清透薄荷灰绿 */
+            background: #fdfaf2; /* 温润的浅宣纸黄 */
             color: #2c3631; /* 沉稳深墨灰 */
             padding: 16px 12px 80px;
             min-height: 100vh;
@@ -348,7 +348,7 @@
     </div>
 
     <div id="sheet1" class="sheet active">
-        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">📖 点击图标,查阅详情</div>
+        <div style="text-align:center; font-size:14px; color:#94a39a; margin-bottom:12px; letter-spacing:1px; font-weight:500;">📖 点击每个图标,可看到详细资料</div>
         <div class="card scroll-area" id="browseContainer"></div>
     </div>
 
@@ -456,7 +456,7 @@ function compileImageGroupHelper(d) {
     let html = '<div class="img-group" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; width:100%;">';
     rawImages.forEach(img => {
         let fullPath = img.startsWith('images/') ? img : `images/${img}`;
-        html += `<img src="${fullPath}" alt="${d.id}" onclick="event.stopPropagation();window.openLightbox('${fullPath}')" style="width:45%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; background:#fff; border:1px solid #eaefec; padding:2px;">`;
+        html += `<img src="${fullPath}" alt="${d.id}" loading="lazy" onclick="event.stopPropagation();window.openLightbox('${fullPath}')" style="width:45%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; background:#fff; border:1px solid #eaefec; padding:2px;">`;
     });
     return html + '</div>';
 }
