@@ -476,7 +476,7 @@ function compileImageGroupHelper(d) {
     // ========================================== 二、底层细分类数据集 (全 Emoji 版) ==========================================
     const dharmaData = [
         // ----------- 四念处 -----------
-        { id: '身念住', category: '四念处', icon: '🧸', tag: '四念处',
+        { id: '身念住', category: '四念处', icon: '🧘', tag: '四念处',
           sanskrit: 'Kāyasmṛtyupasthāna',
           etymology: 'Kāya：源自字根 ci（堆积、积聚），指由骨肉、呼吸等诸多元素堆积而成的聚合体（身体）。\nAnupassanā：由前綴 anu-（随顺、连续、深入）+ 字根paś（看、观察、照见）组成，意为连续不断地深入观照。\nSmṛti-upasthāna：Smṛti（记忆、明记不忘、不失神）；\nupasthāna（置于近前、建立、安住）。\n合起来意为：「將注意力精確地安置於身體聚合體上，進行連續不失神的微觀照見」。',
           classical: '----《俱舍論》：《俱舍论》卷二十五：「以自相共相，观身受心法，是名晨朝修念住。」身念住即是「观身不净」，非指厌恶肉体，而是如实观察身体由三十六物不净和合，无有固定实体。（古代用这个方法，观察身体是一堆流动的细胞）',
@@ -735,7 +735,7 @@ function compileImageGroupHelper(d) {
                     <div class="accordion-body" id="body-${d.id}">`;
                 
                 if (isUnreleased) {
-                    html += `<div style="color:#a08472; text-align:center; padding:6px 0;"><i style="font-style: normal;">🌲</i> 讲义更新中，敬请期待…</div>`;
+                    html += `<div style="color:#a08472; text-align:center; padding:6px 0;"><i style="font-style: normal;">🌲</i> 待新增，稍等哦…</div>`;
                 } else {
                     if (d.sanskrit) html += `<div class="field-content">${renderTextHelper(d.sanskrit)}</div>`;
                     if (d.etymology) html += `<div class="field-content">${renderTextHelper(d.etymology)}</div>`;
@@ -824,7 +824,7 @@ function compileImageGroupHelper(d) {
                 if (isUnreleased) {
                     selectedContent.innerHTML = `
                         <h4><i style="font-style: normal;">${d.icon}</i> ${d.id}</h4>
-                        <div style="color:#a08472;"><i style="font-style: normal;">🎐</i> 功课卡制作中，敬请期待…</div>
+                        <div style="color:#a08472;"><i style="font-style: normal;">🎐</i> 待新增，稍等哦…</div>
                     `;
                 } else {
                     selectedContent.innerHTML = `
