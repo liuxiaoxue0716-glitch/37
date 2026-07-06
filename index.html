@@ -441,7 +441,7 @@ window.openCardLightbox = function() {
         <h3 style="color:#2c3631; margin-bottom:14px; border-bottom:1px solid #eaefec; padding-bottom:10px; font-weight: 500; display:flex; align-items:center;">
             <i style="font-style: normal; margin-right:8px;">${window.currentCard.icon}</i>${window.currentCard.id}
         </h3>
-        <div style="font-size:15px; line-height:1.8; color:#2c3631; font-weight:400; margin-bottom: 16px;">${renderTextHelper(window.currentCard.cardContent || '')}</div>
+        <div style="font-size:15px; line-height:1.8; color:#55635a; margin-bottom: 16px;">${renderTextHelper(window.currentCard.cardContent || '')}</div>
         ${compileImageGroupHelper(window.currentCard)}
     `;
     document.getElementById('textLightbox').classList.add('active');
