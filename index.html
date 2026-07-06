@@ -302,6 +302,13 @@
         .lightbox img { max-width: 95%; max-height: 85%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); object-fit: contain; background: #fff; }
         .lightbox .close-btn { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 32px; cursor: pointer; opacity: 0.6; background: none; border: none; font-family: Arial, sans-serif; }
         
+        .lightbox .img-counter {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 400; font-family: 'Quicksand', sans-serif;
+            background: rgba(0,0,0,0.45); padding: 4px 14px; border-radius: 40px; letter-spacing: 2px;
+            display: none; backdrop-filter: blur(4px); pointer-events: none;
+        }
+
         /* 新增：文本放大弹窗专用样式 */
         .text-lightbox {
             display: none;
@@ -424,14 +431,52 @@
 
 <script>
 // ================= 全局暴露函数 (修复图片/文本放大功能点击失效的问题) =================
-window.closeLightbox = function() { document.getElementById('lightbox').classList.remove('active'); };
-window.openLightbox = function(src) {
+let lbImages = [];
+let lbCurrentIdx = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+let isSwiping = false;
+
+window.closeLightbox = function() { 
+    if (isSwiping) return; // 如果手指在滑动，就不触发点击关闭
+    document.getElementById('lightbox').classList.remove('active'); 
+};
+
+window.openLightbox = function(src, pathsStr) {
     if (!src) return;
-    let cleanSrc = src;
-    if (!cleanSrc.includes('.')) cleanSrc = cleanSrc + '.png'; 
+    let cleanSrc = src.includes('.') ? src : src + '.png';
+    if (pathsStr) {
+        lbImages = pathsStr.split(',').map(s => s.includes('.') ? s : s + '.png');
+        lbCurrentIdx = lbImages.indexOf(cleanSrc);
+        if (lbCurrentIdx === -1) lbCurrentIdx = 0;
+    } else {
+        lbImages = [cleanSrc];
+        lbCurrentIdx = 0;
+    }
     document.getElementById('lightboxImg').src = cleanSrc;
     document.getElementById('lightbox').classList.add('active');
 };
+
+const lbBox = document.getElementById('lightbox');
+lbBox.addEventListener('touchstart', e => { 
+    touchStartX = e.changedTouches[0].screenX; 
+    isSwiping = false; 
+});
+lbBox.addEventListener('touchmove', e => { isSwiping = true; });
+lbBox.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (lbImages.length > 1 && isSwiping) {
+        if (touchEndX < touchStartX - 40) { // 手指左滑，看下一张
+            lbCurrentIdx = (lbCurrentIdx + 1) % lbImages.length;
+            document.getElementById('lightboxImg').src = lbImages[lbCurrentIdx];
+        }
+        if (touchEndX > touchStartX + 40) { // 手指右滑，看上一张
+            lbCurrentIdx = (lbCurrentIdx - 1 + lbImages.length) % lbImages.length;
+            document.getElementById('lightboxImg').src = lbImages[lbCurrentIdx];
+        }
+    }
+    setTimeout(() => { isSwiping = false; }, 50); // 滑动结束后恢复点击功能
+});
 window.closeTextLightbox = function() { document.getElementById('textLightbox').classList.remove('active'); };
 window.openCardLightbox = function() {
     if(!window.currentCard) return;
@@ -458,9 +503,10 @@ function compileImageGroupHelper(d) {
     const rawImages = [d.img1, d.img2, d.img3, d.img4].filter(Boolean);
     if (rawImages.length === 0) return '';
     let html = '<div class="img-group" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; width:100%;">';
-    rawImages.forEach(img => {
-        let fullPath = img.startsWith('images/') ? img : `images/${img}`;
-        html += `<img src="${fullPath}" alt="${d.id}" loading="lazy" onclick="event.stopPropagation();window.openLightbox('${fullPath}')" style="width:45%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; background:#fff; border:1px solid #eaefec; padding:2px;">`;
+    const fullPaths = rawImages.map(img => img.startsWith('images/') ? img : `images/${img}`);
+    const pathsStr = fullPaths.join(','); // 把这组图片的路径打包在一起
+    fullPaths.forEach(fullPath => {
+        html += `<img src="${fullPath}" alt="${d.id}" loading="lazy" onclick="event.stopPropagation();window.openLightbox('${fullPath}', '${pathsStr}')" style="width:45%; max-height:110px; border-radius:12px; cursor:pointer; object-fit:contain; background:#fff; border:1px solid #eaefec; padding:2px;">`;
     });
     return html + '</div>';
 }
@@ -601,7 +647,7 @@ function compileImageGroupHelper(d) {
           cardName: '念根·念力',
           cardContent: '今天我们练习「念根、念力」和「定根、定力」\n「念」是练习，「定」是保持在这个状态里。\n祝大家今天放得很松；定的自在、宽阔！',
           img1: 'nian.jpg' },
-        { id: '定根·定力', category: '五根五力', icon: '🏔️', tag: '五根五力',
+        { id: '定根·定力', category: '五根·五力', icon: '🏔️', tag: '五根五力',
           sanskrit: 'Samādhīndriya / Samādhibala',
           etymology: 'Samādhi（定）：sam（完全地、和諧地）+ ā（朝向、投入）+ 字根 dhā（放置）。。字面总和意义：「将心力完全地、平等地、毫无缝隙地放置在同一个地方」.\n這是一種高度整合、毫無散亂、身心安穩的「大專注」與「大平靜」狀態。----',
           classical: '摄心不散，寂然不动，安心正境，引发三摩地，名为定根；禅定成熟，能破一切散乱躁动，不受外境干扰，名为定力。----',
