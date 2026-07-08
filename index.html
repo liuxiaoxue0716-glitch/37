@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 👇 强制所有设备每次必须拉取最新代码的指令 👇 -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -459,10 +459,14 @@ window.openLightbox = function(src, pathsStr) {
 
 const lbBox = document.getElementById('lightbox');
 lbBox.addEventListener('touchstart', e => { 
+    if (e.touches.length > 1) return; // 🌟 新增：一旦检测到双指，立刻停止滑动拦截，放行原生缩放
     touchStartX = e.changedTouches[0].screenX; 
     isSwiping = false; 
 });
-lbBox.addEventListener('touchmove', e => { isSwiping = true; });
+lbBox.addEventListener('touchmove', e => { 
+    if (e.touches.length > 1) return; // 🌟 新增：双指操作时不触发切图逻辑
+    isSwiping = true; 
+});
 lbBox.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
     if (lbImages.length > 1 && isSwiping) {
@@ -550,7 +554,7 @@ function compileImageGroupHelper(d) {
           
         { id: '心念住', category: '四念处', icon: '🌊', tag: '四念处',
           sanskrit: '梵：Cittasmṛtyupasthāna / \n巴：Cittānupassanā',
-          etymology: '----Citta：源自字根 cit（感知、思考、意识、积聚），指心识、念头、起心动念的主体。\n（我们能思考的那个东西）',
+          etymology: '----Citta：源自字根 cit（感知、思考、意识、积聚），指心识、念头、起心动念的主体。\n---（我们能思考的那个东西）',
           classical: '----《瑜伽师地论》卷三十六：「心念住，谓如实观心无常相。」观「心无常」，了知心识念念生灭，刹那不住，如猿猴探枝，无有一不变的主宰者。',
           modern: '----观看自己每一个念头的升起、运作与消退。不对任何念头进行二次加工，不跟随念头讲故事，保持纯粹的旁观觉察。',
           lecture: '觉 在 观 心 里的变化，不是观察觉的变化，觉永远在那里，不会动。\n不动，观心的起落、起落.....',
@@ -573,7 +577,7 @@ function compileImageGroupHelper(d) {
         // ----------- 四正勤 -----------
         { id: '四正勤', category: '四正勤', icon: '🌿', tag: '四正勤',
           sanskrit: 'Catvāri Samyakpradhānāni / Samyakprahāṇāni',
-          etymology: '----●Samyak：意为「正确的、圆满的、究竟的」。源于结合、朝向同一个正确方向 。\n●Pradhāna（或 Prahāṇa）：在佛法修持中，正确的精进（Pradhāna）必然伴随着对染污的断除（Prahāṇa） 。',
+          etymology: '----●Samyak：意为「正确的、圆满的、究竟的」 。源于结合、朝向同一个正确方向 。\n●Pradhāna（或 Prahāṇa）：在佛法修持中，正确的精进（Pradhāna）必然伴随着对染污的断除（Prahāṇa） 。',
           classical: '----已生恶令断灭,未生恶令不生,未生善令升起,已生善令增长',
           modern: '----四正勤核心内容与修持\n●1. 未生恶令不生\n○白话修持：恶业未发，防护其源，使不升起 。\n●2. 已生恶令断灭\n○白话修持：恶不善法已生，速疾断除，不令相续 。\n●3. 未生善令生起\n○白话修持：未生之善法，修习发起，令其现前 。\n●4. 已生善令增长\n○白话修持：已生之善法，守护不失，令其修满 。',
           lecture: '',
@@ -647,7 +651,7 @@ function compileImageGroupHelper(d) {
           cardName: '念根·念力',
           cardContent: '今天我们练习「念根、念力」和「定根、定力」\n「念」是练习，「定」是保持在这个状态里。\n祝大家今天放得很松；定的自在、宽阔！',
           img1: 'nian.jpg' },
-        { id: '定根·定力', category: '五根五力', icon: '🏔️', tag: '五根五力',
+        { id: '定根·定力', category: '五根·五力', icon: '🏔️', tag: '五根五力',
           sanskrit: 'Samādhīndriya / Samādhibala',
           etymology: 'Samādhi（定）：sam（完全地、和諧地）+ ā（朝向、投入）+ 字根 dhā（放置）。。字面总和意义：「将心力完全地、平等地、毫无缝隙地放置在同一个地方」.\n這是一種高度整合、毫無散亂、身心安穩的「大專注」與「大平靜」狀態。----',
           classical: '摄心不散，寂然不动，安心正境，引发三摩地，名为定根；禅定成熟，能破一切散乱躁动，不受外境干扰，名为定力。----',
